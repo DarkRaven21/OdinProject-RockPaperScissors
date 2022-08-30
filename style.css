@@ -1,0 +1,7 @@
+.Moves {
+    display: flex;
+}
+
+.Moves div {
+    margin: 10px;
+}
