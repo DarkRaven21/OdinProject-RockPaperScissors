@@ -1,7 +1,17 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .Moves {
     display: flex;
 }
 
 .Moves div {
     margin: 10px;
+    border: 2px solid;
+    border-radius: 15px;
+    padding: 25px;
 }
