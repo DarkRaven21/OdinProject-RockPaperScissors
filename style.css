@@ -5,11 +5,11 @@ body {
     align-items: center;
 }
 
-.Moves {
+.moves-container {
     display: flex;
 }
 
-.Moves div {
+.moves-container div {
     margin: 10px;
     border: 2px solid;
     border-radius: 15px;

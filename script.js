@@ -36,30 +36,14 @@ let wins = 0; //Added wins and losses to keep score
 let losses = 0;
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === 'Rock' ||playerSelection === 'Paper' ||playerSelection === 'Scissors') {
-
-        if (playerSelection === computerSelection) {
-            return `You both played ${playerSelection}, it's a tie! better luck next time`;
-        }
-        else if (playerSelection === 'Rock' && computerSelection === 'Scissors' || playerSelection === 'Paper' && computerSelection === 'Rock'|| playerSelection === 'Scissors' && computerSelection === 'Rock' ){
-            wins++;
-            return `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
-        }
-        else {
-            losses++;
-            return `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
-        }
+    if (playerSelection === 'Rock' ||playerSelection === 'Paper' ||playerSelection === 'Scissors') {    
+        return getWinsAndLosses(playerSelection, computerSelection);
     }
-
     else {
         losses++;
         return 'Error, the player must choose a valid hand movement'
     }
-} //Added a double check so the function doesn't work with the wrong input
-
-
-
-
+} //Added check so the function doesn't work with the wrong input
 
 
 //I dont like games to work from prompt. But I will do it because it's in the excersice (I'll change all of this later)
@@ -68,10 +52,15 @@ const playerPromptSelection = window.prompt('It\'s your turn to play, choose eit
 const playerSelection = getCorrectSpelling(playerPromptSelection);
 
 function getCorrectSpelling(string) {
-    a = string.slice(0, 1);
-    b = string.slice(1);
-    return a.toUpperCase()+b.toLowerCase();
-}
+    if (string === null){
+        return `You've cancelled. It'll count as a loss`
+    }
+    else {
+        a = string.slice(0, 1);
+        b = string.slice(1);
+        return a.toUpperCase()+b.toLowerCase();
+    }
+} // Added a null check for cases in wich the player cancelled
 
 console.log(playerSelection);
 
@@ -133,14 +122,20 @@ function gameTo5(){
 
 //While working on playRound
 
-//I've made a function to give me only the positive result from the game and then I made them true. If its not true, then that means either you have tied or you have lost.
-//Eventualy I decided to put all this logic directly in the playRound function for better readability
+//I've made a function to fetch me if the player has won, tied or loss. This will be inside a function that checks if the player input is valid
 
-//function getWinFromGame(playerSelection, computerSelection){
-//    if (playerSelection === 'Rock' && computerSelection === 'Paper' || playerSelection === 'Paper' && computerSelection === 'Rock'|| playerSelection === 'Scissors' && computerSelection === 'Rock' ){
-//        return `You've won! What an incredible play!`
-//    }
-//    else {
-//        return `You lose. But don't worry. The compute always wins`
-//    }
-//}
+function getWinsAndLosses(playerSelection, computerSelection){
+    if (playerSelection === computerSelection) {
+        return `You both played ${playerSelection}, it's a tie! better luck next time`;
+    }
+    else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+             playerSelection === 'Paper' && computerSelection === 'Rock'||
+             playerSelection === 'Scissors' && computerSelection === 'Rock'){               
+        wins++;
+        return `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
+    }
+    else {
+        losses++;
+        return `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
+    }
+}
