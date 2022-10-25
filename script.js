@@ -1,4 +1,5 @@
 //Making Random Number
+
 let randomNumber;
 
 //Math random gives me a number between 0 and 1
@@ -10,11 +11,7 @@ function getRandomNumber(min, max){
     return Math.floor(Math.random()*(max - min + 1) + min);
 }
 
-randomNumber = getRandomNumber(1, 3);
-
 //Making computer selection. Based on the random number obtained above, I made the computer assign that number to a hand move
-
-const computerSelection = getComputerChoice(randomNumber);
 
 
 function getComputerChoice(randomNumber) {
@@ -40,31 +37,40 @@ function playRound(playerSelection, computerSelection) {
         return getWinsAndLosses(playerSelection, computerSelection);
     }
     else {
-        losses++;
-        return 'Error, the player must choose a valid hand movement'
+        return console.log('Error, the player must choose a valid hand movement');
     }
-} //Added check so the function doesn't work with the wrong input
+}
 
+let buttonPressed = document.querySelectorAll('button');
 
-//I dont like games to work from prompt. But I will do it because it's in the excersice (I'll change all of this later)
+for (let i= 0; i < buttonPressed.length; i++){
+    buttonPressed[i].addEventListener('click', () => {
+        computerMove = getComputerChoice(getRandomNumber(1, 3));
+        playRound(buttonPressed[i].textContent, computerMove);
+    });
+}
 
-const playerPromptSelection = window.prompt('It\'s your turn to play, choose either Rock, Paper or Scissors');
-const playerSelection = getCorrectSpelling(playerPromptSelection);
-
-function getCorrectSpelling(string) {
-    if (string === null){
-        return `You've cancelled. It'll count as a loss`
+function getWinsAndLosses(playerSelection, computerSelection){
+    if (playerSelection === computerSelection) {
+        console.log(`You both played ${playerSelection}, it's a tie! better luck next time`)
+        return `You both played ${playerSelection}, it's a tie! better luck next time`;
+    }
+    else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+             playerSelection === 'Paper' && computerSelection === 'Rock'||
+             playerSelection === 'Scissors' && computerSelection === 'Rock'){               
+        wins++;
+        console.log(`You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`)
+        return `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
     }
     else {
-        a = string.slice(0, 1);
-        b = string.slice(1);
-        return a.toUpperCase()+b.toLowerCase();
+        losses++;
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`)
+        return `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
     }
-} // Added a null check for cases in wich the player cancelled
+}
 
-console.log(playerSelection);
+//**********I must delete this at the end**********//
 
-console.log(playRound(playerSelection, computerSelection));
 
 //Making game() function
 
@@ -113,29 +119,5 @@ function gameTo5(){
                 return `You Lose! like I predicted`
             }
         }
-    }
-}
-
-
-
-
-
-//While working on playRound
-
-//I've made a function to fetch me if the player has won, tied or loss. This will be inside a function that checks if the player input is valid
-
-function getWinsAndLosses(playerSelection, computerSelection){
-    if (playerSelection === computerSelection) {
-        return `You both played ${playerSelection}, it's a tie! better luck next time`;
-    }
-    else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
-             playerSelection === 'Paper' && computerSelection === 'Rock'||
-             playerSelection === 'Scissors' && computerSelection === 'Rock'){               
-        wins++;
-        return `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
-    }
-    else {
-        losses++;
-        return `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
     }
 }

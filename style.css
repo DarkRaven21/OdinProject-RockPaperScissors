@@ -9,11 +9,12 @@ body {
     display: flex;
 }
 
-.moves-container div {
+.moves-container button {
     margin: 10px;
     border: 2px solid;
     border-radius: 15px;
     padding: 25px;
+    width: 200px;
 }
 
 .smaller-font {
