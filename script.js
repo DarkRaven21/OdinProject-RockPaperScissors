@@ -41,6 +41,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// Selected all buttons and added a click event
+
 let buttonPressed = document.querySelectorAll('button');
 
 for (let i= 0; i < buttonPressed.length; i++){
@@ -50,22 +52,38 @@ for (let i= 0; i < buttonPressed.length; i++){
     });
 }
 
+// Selected all p grabbing them by the id
+
+let score = document.getElementById('score');
+let myHand = document.getElementById('myHand');
+let computerHand = document.getElementById('computerHand');
+let result = document.getElementById('result');
+
+
+
+
+
 function getWinsAndLosses(playerSelection, computerSelection){
     if (playerSelection === computerSelection) {
-        console.log(`You both played ${playerSelection}, it's a tie! better luck next time`)
-        return `You both played ${playerSelection}, it's a tie! better luck next time`;
+        myHand.textContent = `You've played ${playerSelection}`;
+        computerHand.textContent = `The computer has played ${computerSelection}`;
+        return result.textContent = `You both played ${playerSelection}, it's a tie! better luck next time`;
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
              playerSelection === 'Paper' && computerSelection === 'Rock'||
              playerSelection === 'Scissors' && computerSelection === 'Rock'){               
         wins++;
-        console.log(`You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`)
-        return `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
+        score.textContent = `Wins: ${wins} - Losses ${losses}`;
+        myHand.textContent = `You've played ${playerSelection}`;
+        computerHand.textContent = `The computer has played ${computerSelection}`;
+        return result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
     }
     else {
         losses++;
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`)
-        return `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
+        score.textContent = `Wins: ${wins} - Losses ${losses}`;
+        myHand.textContent = `You've played ${playerSelection}`;
+        computerHand.textContent = `The computer has played ${computerSelection}`;
+        return result.textContent = `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
     }
 }
 
