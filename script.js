@@ -29,15 +29,41 @@ function getComputerChoice(randomNumber) {
     }
 }
 
-let wins = 0; //Added wins and losses to keep score
-let losses = 0;
+// Selected all enemies and added a click event
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === 'Rock' ||playerSelection === 'Paper' ||playerSelection === 'Scissors') {    
-        return getWinsAndLosses(playerSelection, computerSelection);
+let enemiesSelected = document.getElementsByClassName("enemy");
+let roundOpponent = "none";
+
+for (let i= 0; i < enemiesSelected.length; i++){
+    enemiesSelected[i].addEventListener('click', () => {
+        selectEnemy(enemiesSelected[i]);
+    })
+}
+
+function selectEnemy(enemySelected){
+    if (isGameOver){
+        return
     }
-    else {
-        return console.log('Error, the player must choose a valid hand movement');
+    roundOpponent = enemySelected.id;
+    hideEnemies();
+    changeRulesText(enemySelected.id);
+    showHand();
+    score.textContent = `Wins: ${wins} - Losses ${losses}`
+}
+
+function hideEnemies(){
+    if (roundOpponent != 'none'){
+        for (let i= 0; i < enemiesSelected.length; i++){
+                if (roundOpponent != enemiesSelected[i].id){
+                    enemiesSelected[i].style.display = 'none'
+                }
+    }
+    }
+}
+
+function showEnemies() {
+    for (let i= 0; i < enemiesSelected.length; i++){
+        enemiesSelected[i].style.display = 'initial'
     }
 }
 
@@ -52,6 +78,54 @@ for (let i= 0; i < buttonPressed.length; i++){
     });
 }
 
+function showHand(){
+   let show = document.getElementById("moves")
+//    show.style.visibility = 'visible'
+    show.style.display = 'flex'
+}
+
+function hideHand(){
+    let hide = document.getElementById("moves")
+    hide.style.display = 'none'
+}
+
+function changeRulesText(name){
+    rulesClass[0].textContent = `You have chosen ${name} to be your opponent` 
+    rulesClass[1].textContent = `Winner will be he who wins a total of 7 games`
+    rulesClass[2].textContent = `Best of lucks`
+
+}
+
+function playAgainRules(){
+    rulesClass[0].textContent = `Congratulations! You've won a match against ${roundOpponent} and you've earn a total of ${totalPoints} points`
+    rulesClass[1].textContent = `You can keep playing to get even more points. It's time to chose your next oponent`
+    rulesClass[2].textContent = `Yes! you can chose ${roundOpponent} again`
+}
+
+function gameOver(){
+    rulesClass[0].textContent = `Oh no! ${roundOpponent} was to much for you`
+    rulesClass[1].textContent = `Your total Score is ${totalPoints}`
+    rulesClass[2].textContent = `Check the scoreboard to see your placement`
+    let battleDiv = document.getElementById('battleDiv')
+    battleDiv.style.display = 'none'
+}
+
+//Tengo que arreglar esto!!!!!!!!!!!!!!!!!!!!
+function addScore(){
+    btn = document.createElement('button');
+    btn.textContent = 'Score'
+    btn.classList.add('scoreButton')
+    scoreDiv = document.getElementById('scoreDiv')
+    scoreDiv.appendChild(btn)
+    result.style.display = 'none'
+
+    btn.addEventListener('click', showScore)
+}
+
+function showScore(){
+    console.log(totalPoints)
+}
+
 // Selected all p grabbing them by the id
 
 let score = document.getElementById('score');
@@ -59,14 +133,37 @@ let myHand = document.getElementById('myHand');
 let computerHand = document.getElementById('computerHand');
 let result = document.getElementById('result');
 
+//Selected divs
+let rules = document.getElementById('rules');
+let rulesClass = document.getElementsByClassName('rulesClass');
 
+//Game Scripts
+let wins = 0;
+let losses = 0;
+let totalPoints = 0;
+let isGameOver = false;
 
+function playRound(playerSelection, computerSelection) {
+    if (wins >= 7) {
+        wonGame()
+    }
+    else if (losses >= 7) {
+        lossGame()
+    }
+    else
+    if (playerSelection === 'Rock' ||playerSelection === 'Paper' ||playerSelection === 'Scissors') {    
+        return getWinsAndLosses(playerSelection, computerSelection);
+    }
+    else {
+        return console.log('Error, the player must choose a valid hand movement');
+    }
+}
 
 
 function getWinsAndLosses(playerSelection, computerSelection){
     if (playerSelection === computerSelection) {
         myHand.textContent = `You've played ${playerSelection}`;
-        computerHand.textContent = `The computer has played ${computerSelection}`;
+        computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
         return result.textContent = `You both played ${playerSelection}, it's a tie! better luck next time`;
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
@@ -75,67 +172,42 @@ function getWinsAndLosses(playerSelection, computerSelection){
         wins++;
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
-        computerHand.textContent = `The computer has played ${computerSelection}`;
-        return result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
+        computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
+        result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
+        if (wins >=7) {
+            wonGame();
+        }
+        return
     }
     else {
         losses++;
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
-        computerHand.textContent = `The computer has played ${computerSelection}`;
-        return result.textContent = `You lose! ${computerSelection} beats ${playerSelection}. But don't worry. The computer always wins`
+        computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
+        result.textContent = `You lose! ${computerSelection} beats ${playerSelection}. ${roundOpponent} is gotten you figured out!`
+        if (losses >=7) {
+            lossGame();
+        }
+        return
     }
 }
 
-//**********I must delete this at the end**********//
-
-
-//Making game() function
-
-function game(){
-    wins = 0;
-    losses = 0
-
-    for (let i = 0; i < 5; i++){
-        playerMove = getCorrectSpelling(window.prompt('It\'s your turn to play, choose either Rock, Paper or Scissors'));
-        computerMove = getComputerChoice(random = getRandomNumber(1, 3));
-        console.log(playRound(playerMove, computerMove));        
-    }
-
-    if (wins > losses){
-        return `I can't believe you have won! Congratulations`
-    }
-    else if (losses > wins){
-        return 'You lose! I told you that the computer always wins'
-    }
-    else{
-        return `It's a tie in the global! Amaizing effort. Keep going and you'll win someday`
-    }
-}
-
-//Making a gameTo5() function
-
-function gameTo5(){
+function wonGame(){
+    console.log(`You've won`)
+    totalPoints+= 150;
+    hideHand();
+    showEnemies();
+    playAgainRules();
     wins = 0;
     losses = 0;
-    KeepGoing = true;
+}
 
-    while(KeepGoing){
-        playerMove = getCorrectSpelling(window.prompt('It\'s your turn to play, choose either Rock, Paper or Scissors'));
-        computerMove = getComputerChoice(random = getRandomNumber(1, 3));
-        console.log(playRound(playerMove, computerMove));
-        if (wins < 5 && losses < 5){
-            KeepGoing;
-        }
-        else{
-            if (wins === 5){
-                KeepGoing = false;
-                return `You Won!! You are a hero at this`
-            }
-            else {
-                KeepGoing = false;
-                return `You Lose! like I predicted`
-            }
-        }
-    }
+function lossGame(){
+    console.log(`Game Over`)
+    isGameOver = true;
+    hideHand();
+    gameOver();
+    addScore();
+    wins = 0;
+    losses = 0;
 }

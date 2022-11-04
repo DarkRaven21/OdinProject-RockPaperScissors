@@ -5,8 +5,12 @@ body {
     align-items: center;
 }
 
+#rules p {
+    text-align: center;
+}
+
 .moves-container {
-    display: flex;
+    display: none;
 }
 
 .moves-container button {
@@ -21,6 +25,10 @@ body {
     font-size: small;
 }
 
+.enemy {
+    width: 300px;
+}
+
 .battle-container {
     display: flex;
     justify-content: space-around;
@@ -28,6 +36,15 @@ body {
 }
 
 p {
-    margin-top: 35px;
+    margin: auto;
     padding: 15px;
+}
+
+
+.scoreButton {
+    margin: 10px;
+    border: 2px solid;
+    border-radius: 15px;
+    padding: 25px;
+    width: 200px;
 }
