@@ -123,7 +123,16 @@ function addScore(){
 }
 
 function showScore(){
-    console.log(totalPoints)
+    main = document.getElementById('main')
+    main.style.display = 'none'
+
+    score = document.getElementById('scoreBoard')
+    score.style.display = 'block'
+    playerName = prompt('Enter your name');
+    emptyName = document.getElementById('playerName');
+    emptyName.textContent = playerName+':';
+    emptyPoints = document.getElementById('playerPoints')
+    emptyPoints.textContent = totalPoints
 }
 
 // Selected all p grabbing them by the id

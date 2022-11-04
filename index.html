@@ -8,30 +8,49 @@
 
 
         <body>
-          <h1>Hello! and Welcome to 2020 Rock Paper Scissors Tournament</h1>
-          <div id="rules">
-            <p class="rulesClass">This are all you possible oponents, you must win points by defeating them in singular Rock, Paper, Scissors matches.</p> 
-            <p class="rulesClass">If you collect more points than them, you will be crowned the RPS Master</p>
-            <p class="rulesClass">Choose your oponent</p>
+          <div id="scoreBoard">
+            <h1>Rock Paper Scissors Hall of Fame</h1>
+            <ol>
+              <li>
+                <span class="name">Milton:</span><span class="points">600</span>
+              </li>
+              <li>
+                <span class="name">Jen:</span><span class="points">450</span>
+              </li>
+              <li>
+                <span class="name">Jack:</span><span class="points">150</span>
+              </li>
+              <li>
+                <span class="name" id="playerName">You:</span><span class="points" id="playerPoints">0</span>
+              </li>
+            </ol>
           </div>
-          <div class="enemy-container">
-            <img class="enemy" id="Milton" src="img/milton.png">
-            <img class="enemy" id="Jack" src="img/hazmat.png">
-            <img class="enemy" id="Jen" src="img/jen.png">
-          </div>
-          <br>
-          <div class="moves-container" id="moves">
-            <button class="choice">Rock</button>
-            <button class="choice">Paper</button>
-            <button class="choice">Scissors</button>
-          </div>
-          <p id="score">Wins: 0 - Losses: 0</p>
-          <div class="battle-container" id="battleDiv">
-            <p id="myHand"></p>
-            <p id="computerHand"></p>
-          </div>
-          <div id="scoreDiv">
-            <p id="result"></p>
+          <div id="main">
+            <h1>Hello! and Welcome to 2020 Rock Paper Scissors Tournament</h1>
+            <div id="rules">
+              <p class="rulesClass">This are all you possible oponents, you must win points by defeating them in singular Rock, Paper, Scissors matches.</p> 
+              <p class="rulesClass">If you collect more points than them, you will be crowned the RPS Master</p>
+              <p class="rulesClass">Choose your oponent</p>
+            </div>
+            <div class="enemy-container">
+              <img class="enemy" id="Milton" src="img/milton.png">
+              <img class="enemy" id="Jack" src="img/hazmat.png">
+              <img class="enemy" id="Jen" src="img/jen.png">
+            </div>
+            <br>
+            <div class="moves-container" id="moves">
+              <button class="choice">Rock</button>
+              <button class="choice">Paper</button>
+              <button class="choice">Scissors</button>
+            </div>
+            <p id="score">Wins: 0 - Losses: 0</p>
+            <div class="battle-container" id="battleDiv">
+              <p id="myHand"></p>
+              <p id="computerHand"></p>
+            </div>
+            <div id="scoreDiv">
+              <p id="result"></p>
+            </div>
           </div>
         </body>
         <script src="script.js"></script>

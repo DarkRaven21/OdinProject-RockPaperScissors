@@ -3,6 +3,11 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+
+#scoreBoard{
+    display: none;
 }
 
 #rules p {
@@ -11,6 +16,7 @@ body {
 
 .moves-container {
     display: none;
+    justify-content: center;
 }
 
 .moves-container button {
@@ -32,12 +38,15 @@ body {
 .battle-container {
     display: flex;
     justify-content: space-around;
-    width: 600px;
 }
 
 p {
     margin: auto;
     padding: 15px;
+}
+
+#result {
+    margin-top: 15px;
 }
 
 
@@ -47,4 +56,19 @@ p {
     border-radius: 15px;
     padding: 25px;
     width: 200px;
+}
+
+li {
+    padding: 45px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+ol {
+    display: grid;
+    justify-content: center;
+}
+
+.points {
+    margin-left: 2em;
 }
