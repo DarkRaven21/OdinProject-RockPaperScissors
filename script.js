@@ -133,6 +133,27 @@ function showScore(){
     emptyName.textContent = playerName+':';
     emptyPoints = document.getElementById('playerPoints')
     emptyPoints.textContent = totalPoints
+    sortScore();
+}
+
+function sortScore(){
+    let list = document.getElementById('rankingList')
+    let you = document.getElementById('playerRanking')
+    if (totalPoints >= 600){
+        let milton = document.getElementById('miltonRanking')
+        let newYou = list.insertBefore(you, milton)
+    }
+    else if (totalPoints >= 450){
+        let jen = document.getElementById('jenRanking')
+        let newYou = list.insertBefore(you, jen)
+    }
+    else if (totalPoints >= 150){
+        let jack = document.getElementById('jackRanking')
+        let newYou = list.insertBefore(you, jack)
+    }
+    else {
+        return
+    }
 }
 
 // Selected all p grabbing them by the id

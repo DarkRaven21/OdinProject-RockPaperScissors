@@ -5,30 +5,37 @@
     <title>Rock Paper Scissors</title>
     <head>
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&display=swap" rel="stylesheet">
 
 
         <body>
           <div id="scoreBoard">
             <h1>Rock Paper Scissors Hall of Fame</h1>
-            <ol>
-              <li>
-                <span class="name">Milton:</span><span class="points">600</span>
+            <ol id="rankingList">
+              <li id="miltonRanking">
+                <span class="name">Milton:</span>
+                <span class="points">600</span>
               </li>
-              <li>
-                <span class="name">Jen:</span><span class="points">450</span>
+              <li id="jenRanking">
+                <span class="name">Jen:</span>
+                <span class="points">450</span>
               </li>
-              <li>
-                <span class="name">Jack:</span><span class="points">150</span>
+              <li id="jackRanking">
+                <span class="name">Jack:</span>
+                <span class="points">150</span>
               </li>
-              <li>
-                <span class="name" id="playerName">You:</span><span class="points" id="playerPoints">0</span>
+              <li id="playerRanking">
+                <span class="name" id="playerName">You:</span>
+                <span class="points" id="playerPoints">0</span>
               </li>
             </ol>
           </div>
           <div id="main">
             <h1>Hello! and Welcome to 2020 Rock Paper Scissors Tournament</h1>
             <div id="rules">
-              <p class="rulesClass">This are all you possible oponents, you must win points by defeating them in singular Rock, Paper, Scissors matches.</p> 
+              <p class="rulesClass">This are your possible oponents, you must win points by defeating them in singular Rock, Paper, Scissors matches.</p> 
               <p class="rulesClass">If you collect more points than them, you will be crowned the RPS Master</p>
               <p class="rulesClass">Choose your oponent</p>
             </div>
