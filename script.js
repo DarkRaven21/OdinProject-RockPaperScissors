@@ -198,7 +198,7 @@ function getWinsAndLosses(playerSelection, computerSelection){
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
              playerSelection === 'Paper' && computerSelection === 'Rock'||
-             playerSelection === 'Scissors' && computerSelection === 'Rock'){               
+             playerSelection === 'Scissors' && computerSelection === 'Paper'){               
         wins++;
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
