@@ -110,8 +110,8 @@ function gameOver(){
     battleDiv.style.display = 'none'
 }
 
-//Tengo que arreglar esto!!!!!!!!!!!!!!!!!!!!
 function addScore(){
+    getOpponentScore()
     btn = document.createElement('button');
     btn.textContent = 'Score'
     btn.classList.add('scoreButton')
@@ -130,30 +130,13 @@ function showScore(){
     score.style.display = 'block'
     playerName = prompt('Enter your name');
     emptyName = document.getElementById('playerName');
-    emptyName.textContent = playerName+':';
+
+    if (playerName === null) {emptyName.textContent = 'You'}
+    else {emptyName.textContent = playerName+':';}
+    
     emptyPoints = document.getElementById('playerPoints')
     emptyPoints.textContent = totalPoints
     sortScore();
-}
-
-function sortScore(){
-    let list = document.getElementById('rankingList')
-    let you = document.getElementById('playerRanking')
-    if (totalPoints >= 600){
-        let milton = document.getElementById('miltonRanking')
-        let newYou = list.insertBefore(you, milton)
-    }
-    else if (totalPoints >= 450){
-        let jen = document.getElementById('jenRanking')
-        let newYou = list.insertBefore(you, jen)
-    }
-    else if (totalPoints >= 150){
-        let jack = document.getElementById('jackRanking')
-        let newYou = list.insertBefore(you, jack)
-    }
-    else {
-        return
-    }
 }
 
 // Selected all p grabbing them by the id
@@ -260,4 +243,36 @@ function lossGame(){
     addScore();
     wins = 0;
     losses = 0;
+}
+
+function getOpponentScore(){
+    let milton = document.getElementById('miltonRanking')
+    let jen = document.getElementById('jenRanking')
+    let jack = document.getElementById('jackRanking')
+
+    milton.querySelector('.points').textContent = (getRandomNumber(4, 5) * 150)
+    jen.querySelector('.points').textContent = (getRandomNumber(2, 3) * 150)
+    jack.querySelector('.points').textContent = (getRandomNumber(1, 2) * 150)
+}
+
+function sortScore(){
+    let list = document.getElementById('rankingList')
+    let you = document.getElementById('playerRanking')
+    let milton = document.getElementById('miltonRanking')
+    let jen = document.getElementById('jenRanking')
+    let jack = document.getElementById('jackRanking')
+
+
+    if (totalPoints >= parseInt(milton.querySelector('.points').textContent)){
+        let newYou = list.insertBefore(you, milton)
+    }
+    else if (totalPoints >= parseInt(jen.querySelector('.points').textContent)){
+        let newYou = list.insertBefore(you, jen)
+    }
+    else if (totalPoints >= parseInt(jack.querySelector('.points').textContent)){
+        let newYou = list.insertBefore(you, jack)
+    }
+    else {
+        return
+    }
 }
