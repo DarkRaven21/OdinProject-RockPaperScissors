@@ -203,9 +203,12 @@ function getWinsAndLosses(playerSelection, computerSelection){
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
         computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
-        result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. What an incredible play!`
         if (wins >=7) {
             wonGame();
+            result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. ${roundOpponent} it's out!`
+        }
+        else {
+            result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. `+ shout(roundOpponent, true)
         }
         return
     }
@@ -214,13 +217,30 @@ function getWinsAndLosses(playerSelection, computerSelection){
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
         computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
-        result.textContent = `You lose! ${computerSelection} beats ${playerSelection}. ${roundOpponent} is gotten you figured out!`
+        
         if (losses >=7) {
             lossGame();
+        }
+        else {
+            result.textContent = `You lose! ${computerSelection} beats ${playerSelection}. `+ shout(roundOpponent, false)
         }
         return
     }
 }
+
+function shout(opponent, isWin){
+    if (isWin){
+        shoutWins = ['What an incredible play!', 'What a play!', `${opponent} is in shock`, `${opponent} seems lost`, `${opponent} doesn't understand whats happening`]
+        return shoutWins[getRandomNumber(0,4)]
+    }
+    else {
+        shoutLosses = [`${opponent} is gotten you figured out!`, `${opponent} is enjoying this`, `${opponent} seems in the zone`, `Perfect excecution for ${opponent}`, `${opponent} is oozing with confidence`]
+        return shoutLosses[getRandomNumber(0,4)]
+    }
+    
+}
+
+
 
 function wonGame(){
     console.log(`You've won`)
