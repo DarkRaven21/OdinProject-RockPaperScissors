@@ -36,6 +36,7 @@ let roundOpponent = "none";
 
 for (let i= 0; i < enemiesSelected.length; i++){
     enemiesSelected[i].addEventListener('click', () => {
+        result.textContent = ''
         selectEnemy(enemiesSelected[i]);
     })
 }
@@ -73,6 +74,8 @@ let buttonPressed = document.querySelectorAll('button');
 
 for (let i= 0; i < buttonPressed.length; i++){
     buttonPressed[i].addEventListener('click', () => {
+        imgL.src = '';
+        imgR.src = '';
         computerMove = getComputerChoice(getRandomNumber(1, 3));
         playRound(buttonPressed[i].textContent, computerMove);
     });
@@ -133,7 +136,7 @@ function showScore(){
 
     if (playerName === null) {emptyName.textContent = 'You'}
     else {emptyName.textContent = playerName+':';}
-    
+
     emptyPoints = document.getElementById('playerPoints')
     emptyPoints.textContent = totalPoints
     sortScore();
@@ -149,6 +152,10 @@ let result = document.getElementById('result');
 //Selected divs
 let rules = document.getElementById('rules');
 let rulesClass = document.getElementsByClassName('rulesClass');
+
+//Selected img
+let imgR = document.getElementById('myHandIcon')
+let imgL = document.getElementById('computerHandIcon')
 
 //Game Scripts
 let wins = 0;
@@ -176,7 +183,9 @@ function playRound(playerSelection, computerSelection) {
 function getWinsAndLosses(playerSelection, computerSelection){
     if (playerSelection === computerSelection) {
         myHand.textContent = `You've played ${playerSelection}`;
+        imgR.src = `img/${playerSelection}R.png`
         computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
+        imgL.src = `img/${computerSelection}L.png`
         return result.textContent = `You both played ${playerSelection}, it's a tie! better luck next time`;
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
@@ -185,10 +194,17 @@ function getWinsAndLosses(playerSelection, computerSelection){
         wins++;
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
+        imgR.src = `img/${playerSelection}R.png`
         computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
+        imgL.src = `img/${computerSelection}L.png`
+
         if (wins >=7) {
             wonGame();
             result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. ${roundOpponent} it's out!`
+            myHand.textContent = ''
+            imgR.src = ''
+            computerHand.textContent = ''
+            imgL.src = ''
         }
         else {
             result.textContent = `You've won! ${playerSelection} beats ${computerSelection}. `+ shout(roundOpponent, true)
@@ -199,7 +215,9 @@ function getWinsAndLosses(playerSelection, computerSelection){
         losses++;
         score.textContent = `Wins: ${wins} - Losses ${losses}`;
         myHand.textContent = `You've played ${playerSelection}`;
+        imgR.src = `img/${playerSelection}R.png`
         computerHand.textContent = `${roundOpponent} has played ${computerSelection}`;
+        imgL.src = `img/${computerSelection}L.png`
         
         if (losses >=7) {
             lossGame();
